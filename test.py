@@ -58,6 +58,7 @@ class TestLibrary(TestCase):
         '''
         print("TEST: All files must be json")
         for jsonfile in self.experiments:
+            print("Experiment %s" %(os.path.basename(jsonfile)))
             self.assertTrue(jsonfile.endswith('.json')) 
 
 
@@ -66,6 +67,7 @@ class TestLibrary(TestCase):
         '''
         print("TEST: Files are valid json format")
         for jsonfile in self.experiments:
+            print("Experiment %s" %(os.path.basename(jsonfile)))
             with open(jsonfile,'r') as filey:
                 content = json.load(filey)
             self.assertTrue(isinstance(content,dict)) 
@@ -76,12 +78,15 @@ class TestLibrary(TestCase):
         '''
         print("TEST: Validate json content")
         for jsonfile in self.experiments:
+            print("Experiment %s" %(os.path.basename(jsonfile)))
             with open(jsonfile,'r') as filey:
                 content = json.load(filey)
-            self.assertTrue("maintainers" in content) 
+            print("        Github")
             self.assertTrue("github" in content) 
-            self.assertTrue(isinstance(content["github"],str))
             self.assertTrue(re.search("(\w+://)(.+@)*([\w\d\.]+)(:[\d]+){0,1}/*(.*)",content['github']) is not None)
+            self.assertTrue(isinstance(content["github"],str))
+            print("        Maintainers")
+            self.assertTrue("maintainers" in content) 
             self.assertTrue(isinstance(content["maintainers"],list)) 
             for maintainer in content['maintainers']:
                 self.assertTrue(isinstance(maintainer,dict))
@@ -89,7 +94,6 @@ class TestLibrary(TestCase):
                 self.assertTrue("github" in maintainer)
                 self.assertTrue("name" in maintainer)
                 self.assertTrue(maintainer['github'].startswith('@'))
-                print(maintainer)
                 self.assertTrue(re.search("^.+@.+[.]{1}.+$",maintainer['email']) is not None)
 
 if __name__ == '__main__':
