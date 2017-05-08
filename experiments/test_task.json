@@ -1,0 +1,13 @@
+{
+   "maintainers": [ 
+
+                    {
+                      "name":"Vanessa Sochat",
+                      "email": "vsochat@stanford.edu",
+                      "github": "@vsoch"
+                    }
+                 ],
+
+   "github":   "https://github.com/expfactory-experiments/test_task.git"
+
+}
