@@ -1,0 +1,24 @@
+[
+    {
+        "maintainers": [
+            {
+                "github": "@vsoch",
+                "name": "Vanessa Sochat",
+                "email": "vsochat@stanford.edu"
+            }
+        ],
+        "github": "https://github.com/expfactory-experiments/test_task.git",
+        "name": "test_task"
+    },
+    {
+        "maintainers": [
+            {
+                "github": "@vsoch",
+                "name": "Vanessa Sochat",
+                "email": "vsochat@stanford.edu"
+            }
+        ],
+        "github": "https://github.com/expfactory-experiments/tower_of_london.git",
+        "name": "tower_of_london"
+    }
+]

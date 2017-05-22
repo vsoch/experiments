@@ -33,6 +33,7 @@ import sys
 from glob import glob
 import json
 
+from expfactory.validators.experiments import LibraryValidator
 from unittest import TestCase
 
 VERSION = sys.version_info[0]
@@ -45,6 +46,7 @@ class TestLibrary(TestCase):
     def setUp(self):
 
         # Test repo information
+        self.validator = LibraryValidator()
         self.experiments_base = "%s/experiments" %(here) 
         self.experiments = glob("%s/*" %self.experiments_base)
         
@@ -58,8 +60,7 @@ class TestLibrary(TestCase):
         '''
         print("TEST: All files must be json")
         for jsonfile in self.experiments:
-            print("Experiment %s" %(os.path.basename(jsonfile)))
-            self.assertTrue(jsonfile.endswith('.json')) 
+            self.assertTrue(self.validator.validate_extension(jsonfile)) 
 
 
     def test_load_json(self):
@@ -67,10 +68,7 @@ class TestLibrary(TestCase):
         '''
         print("TEST: Files are valid json format")
         for jsonfile in self.experiments:
-            print("Experiment %s" %(os.path.basename(jsonfile)))
-            with open(jsonfile,'r') as filey:
-                content = json.load(filey)
-            self.assertTrue(isinstance(content,dict)) 
+            self.assertTrue(self.validator.validate_loading(jsonfile)) 
 
     def test_validate_json(self):
         '''test_validate_json ensures that all files have
@@ -78,23 +76,8 @@ class TestLibrary(TestCase):
         '''
         print("TEST: Validate json content")
         for jsonfile in self.experiments:
-            print("Experiment %s" %(os.path.basename(jsonfile)))
-            with open(jsonfile,'r') as filey:
-                content = json.load(filey)
-            print("        Github")
-            self.assertTrue("github" in content) 
-            self.assertTrue(re.search("(\w+://)(.+@)*([\w\d\.]+)(:[\d]+){0,1}/*(.*)",content['github']) is not None)
-            self.assertTrue(isinstance(content["github"],str))
-            print("        Maintainers")
-            self.assertTrue("maintainers" in content) 
-            self.assertTrue(isinstance(content["maintainers"],list)) 
-            for maintainer in content['maintainers']:
-                self.assertTrue(isinstance(maintainer,dict))
-                self.assertTrue("email" in maintainer)
-                self.assertTrue("github" in maintainer)
-                self.assertTrue("name" in maintainer)
-                self.assertTrue(maintainer['github'].startswith('@'))
-                self.assertTrue(re.search("^.+@.+[.]{1}.+$",maintainer['email']) is not None)
+            self.assertTrue(self.validator.validate_content(jsonfile)) 
+
 
 if __name__ == '__main__':
     unittest.main()
