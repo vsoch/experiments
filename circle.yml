@@ -1,9 +1,11 @@
 dependencies:
   pre:
     - echo "The Experiment Factory!"
+    - wget https://bootstrap.pypa.io/get-pip.py
+    - python3 get-pip.py
     - git clone -b development https://www.github.com/vsoch/expfactory-python
-    - pip3 install setuptools
-    - cd expfactory-python && pip3 install -r requirements.txt && python3 setup.py install
+    - pip install setuptools
+    - cd expfactory-python && pip install -r requirements.txt && python3 setup.py install
 
 test:
   override:
