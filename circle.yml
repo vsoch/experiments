@@ -15,4 +15,5 @@ dependencies:
 
 test:
   override:
+    - export PATH=$HOME/anaconda3/bin:$PATH
     - python -m unittest test
