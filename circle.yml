@@ -1,6 +1,9 @@
 dependencies:
   pre:
     - echo "The Experiment Factory!"
+    - git clone -b https://www.github.com/vsoch/expfactory-python
+    - cd expfactory-python
+    - python3 setup.py install
 
 test:
   override:
