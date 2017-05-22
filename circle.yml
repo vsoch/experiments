@@ -1,12 +1,17 @@
 dependencies:
   pre:
     - echo "The Experiment Factory!"
-    - wget https://bootstrap.pypa.io/get-pip.py
-    - sudo python3 get-pip.py
+    - wget https://repo.continuum.io/archive/Anaconda3-4.2.0-Linux-x86_64.sh
+    - bash Anaconda3-4.2.0-Linux-x86_64.sh -b
+    - echo "PATH=\$HOME/anaconda3/bin:\$PATH" >> $HOME/.profile
+    - echo export PATH >> $HOME/.bashrc
+    - rm Anaconda3-4.2.0-Linux-x86_64.sh
+    - which python
+    - source $HOME/.bashrc
     - git clone -b development https://www.github.com/vsoch/expfactory-python
-    - sudo pip install setuptools
-    - cd expfactory-python && sudo pip install -r requirements.txt && sudo python3 setup.py install
+    - pip install setuptools
+    - cd expfactory-python && pip install -r requirements.txt && python setup.py install
 
 test:
   override:
-    - python3 -m unittest test
+    - python -m unittest test

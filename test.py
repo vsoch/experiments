@@ -33,7 +33,7 @@ import sys
 from glob import glob
 import json
 
-from expfactory.validators.experiments import LibraryValidator
+from expfactory.validator import LibraryValidator
 from unittest import TestCase
 
 VERSION = sys.version_info[0]
