@@ -6,6 +6,7 @@ dependencies:
     - echo "PATH=\$HOME/anaconda3/bin:\$PATH" >> $HOME/.profile
     - echo export PATH >> $HOME/.bashrc
     - rm Anaconda3-4.2.0-Linux-x86_64.sh
+    - export PATH=$HOME/anaconda3/bin:$PATH
     - which python
     - source $HOME/.bashrc
     - git clone -b development https://www.github.com/vsoch/expfactory-python
